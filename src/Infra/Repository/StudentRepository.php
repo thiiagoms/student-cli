@@ -23,7 +23,7 @@ class StudentRepository extends Student implements StudentContract
 
     public function __construct()
     {
-        $this->db = Database::open();
+        $this->db = (new Database())->open();
     }
 
     /**
@@ -55,14 +55,14 @@ class StudentRepository extends Student implements StudentContract
      */
     public function index(): array
     {
-        $queryString = "SELECT * FROm {$this->table}";
-        $stmt = $this->db->prepare($queryString);
-
+        $queryString = "SELECT * FROM {$this->table};";
+        $stmt = $this->db->query($queryString);
+        
         return $this->hydrateStudent($stmt);
     }
 
     /**
-     * Insert new stdent
+     * Insert new student
      * 
      * @param Student $student
      * @return bool
@@ -74,7 +74,7 @@ class StudentRepository extends Student implements StudentContract
 
         $success = $stmt->execute([
             ':name' => $student->name(),
-            ':birth_date' => $student->birthDate()
+            ':birth_date' => $student->birthDate()->format('Y-m-d')
         ]);
 
         if ($success) {
@@ -110,7 +110,7 @@ class StudentRepository extends Student implements StudentContract
      */
     public function save(Student $student): bool
     {
-        if (is_null($this->id())) {
+        if (is_null($student->id())) {
             return $this->insert($student);
         }
 

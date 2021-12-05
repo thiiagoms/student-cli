@@ -1,8 +1,8 @@
 <p align="center">
   <a href="https://github.com/thiiagoms/student-cli">
-    <img src="assets/student.png" alt="Logo" width="120" height="80">
+    <img src="assets/student.png" alt="Logo" width="80" height="80">
   </a>
-     <h3 align="center">CLI crud :students:</h3>
+     <h3 align="center">CLI crud :student:</h3>
 </p>
 
 Example of CLI crud, just for educational purposes!
